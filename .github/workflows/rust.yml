@@ -103,7 +103,8 @@ jobs:
 
   build-i686:
     name: Build i686-unknown-linux-gnu
-    runs-on: ubuntu-latest
+    # GitHub-hosted runners banned until Actions spending restored (fleet only).
+    runs-on: ${{ github.event_name == 'pull_request' && fromJSON('["self-hosted","Linux","X64","pr-isolated"]') || fromJSON('["self-hosted","Linux","X64","heavy"]') }}
     # Verifies that fff-search compiles on 32-bit x86, where std::arch::x86_64
     # is unavailable. SIMD paths are disabled on this target; only the scalar
     # fallback should build. See issue #656.
@@ -129,7 +130,8 @@ jobs:
 
   fmt:
     name: cargo fmt
-    runs-on: ubuntu-latest
+    # GitHub-hosted runners banned until Actions spending restored (fleet only).
+    runs-on: ${{ github.event_name == 'pull_request' && fromJSON('["self-hosted","Linux","X64","pr-isolated"]') || fromJSON('["self-hosted","Linux","X64","heavy"]') }}
     steps:
       - uses: actions/checkout@v5
       - name: Install Rust
@@ -142,7 +144,8 @@ jobs:
 
   clippy:
     name: cargo clippy
-    runs-on: ubuntu-latest
+    # GitHub-hosted runners banned until Actions spending restored (fleet only).
+    runs-on: ${{ github.event_name == 'pull_request' && fromJSON('["self-hosted","Linux","X64","pr-isolated"]') || fromJSON('["self-hosted","Linux","X64","heavy"]') }}
     steps:
       - uses: actions/checkout@v5
       
@@ -165,7 +168,8 @@ jobs:
     name: Notify Linear on CI failure
     if: failure() && github.event_name != 'merge_group'
     needs: [push, pull_request, CARGO_TERM_COLOR, MACOSX_DEPLOYMENT_TARGET, test, stress-test, build-i686, fmt, clippy]
-    runs-on: ubuntu-latest
+    # GitHub-hosted runners banned until Actions spending restored (fleet only).
+    runs-on: ${{ github.event_name == 'pull_request' && fromJSON('["self-hosted","Linux","X64","pr-isolated"]') || fromJSON('["self-hosted","Linux","X64","heavy"]') }}
     timeout-minutes: 3
     steps:
       - env:

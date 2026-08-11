@@ -147,7 +147,8 @@ jobs:
   # actually runs.
   alpine-musl:
     name: e2e (alpine-musl)
-    runs-on: ubuntu-latest
+    # GitHub-hosted runners banned until Actions spending restored (fleet only).
+    runs-on: ${{ github.event_name == 'pull_request' && fromJSON('["self-hosted","Linux","X64","pr-isolated"]') || fromJSON('["self-hosted","Linux","X64","heavy"]') }}
     container: node:22-alpine
     continue-on-error: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
     defaults:
