@@ -137,6 +137,14 @@ jobs:
         shell: bash
         run: cd packages/fff-node && npm install
 
+      # Unix-runners hebben geen Rust-build in deze matrix; zonder libfff_c
+      # faalt prepare-node -> findBinary() -> e2e. Spiegelt de Windows-step
+      # hierboven: bouw de C-library zodat prepare-node hem naar
+      # packages/fff-node/bin kopieert (macOS -> .dylib, Linux -> .so).
+      - name: Build Rust binary (Unix)
+        if: ${{ !matrix.target }}
+        run: cargo build --release -p fff-c
+
       - name: Run node tests
         shell: bash
         run: make test-node
