@@ -644,7 +644,6 @@ jobs:
       url: https://pypi.org/p/fff-search
     permissions:
       contents: read
-      id-token: write
     steps:
       - name: Download Python wheels and sdist
         uses: actions/download-artifact@v4
