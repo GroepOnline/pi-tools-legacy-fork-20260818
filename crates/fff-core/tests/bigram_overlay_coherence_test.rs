@@ -78,8 +78,7 @@ fn bigram_overlay_coherence_stress_base_edits_and_deletes() {
 
         // -- EDIT: modify next 5 live base files --
         let edit_count = 5.min(live_tokens.len());
-        for i in 0..edit_count {
-            let (ref name, ref mut old_token) = live_tokens[i];
+        for (i, (name, old_token)) in live_tokens.iter_mut().take(edit_count).enumerate() {
             let new_token = format!("EDITED_R{round}_{i:04}");
             write_file_with_token(base, name, &new_token);
             {
@@ -563,8 +562,7 @@ fn bigram_overlay_coherence_full_stress_loop_with_overflow() {
         }
 
         // -- EDIT 5 base files --
-        for i in 0..5.min(live_base.len()) {
-            let (ref name, ref mut old_token) = live_base[i];
+        for (i, (name, old_token)) in live_base.iter_mut().take(5).enumerate() {
             let new_token = format!("EDITED_R{round}_{i:04}");
             write_file_with_token(base, name, &new_token);
             let mut guard = shared_picker.write().unwrap();
@@ -675,8 +673,7 @@ fn bigram_overlay_coherence_overflow_file_edit_and_delete() {
     }
 
     // Delete first 5 overflow files.
-    for i in 0..5 {
-        let (ref path, _) = overflow_files[i];
+    for (path, _) in overflow_files.iter().take(5) {
         fs::remove_file(path).unwrap();
         {
             let mut guard = shared_picker.write().unwrap();
@@ -731,8 +728,7 @@ fn bigram_overlay_coherence_rescan_after_git_commit() {
 
     // Edit 10 base files and add 5 new files.
     let mut edited_tokens = Vec::new();
-    for i in 0..10 {
-        let (ref name, _) = repo_files[i];
+    for (i, (name, _)) in repo_files.iter().take(10).enumerate() {
         let token = format!("PRE_COMMIT_EDIT_{i:04}");
         write_file_with_token(base, name, &token);
         {
@@ -837,8 +833,7 @@ fn bigram_overlay_coherence_full_lifecycle_seed_edit_commit_rescan_edit() {
 
     // -- Phase 1: Pre-commit overlay edits (base files only) --
     let mut phase1_tokens = Vec::new();
-    for i in 0..10 {
-        let (ref name, _) = repo_files[i];
+    for (i, (name, _)) in repo_files.iter().take(10).enumerate() {
         let token = format!("PHASE1_EDIT_{i:04}");
         write_file_with_token(base, name, &token);
         {
@@ -851,8 +846,7 @@ fn bigram_overlay_coherence_full_lifecycle_seed_edit_commit_rescan_edit() {
 
     // Delete some files (pick indices near the end).
     let mut phase1_dead = Vec::new();
-    for i in 195..200 {
-        let (ref name, ref token) = repo_files[i];
+    for (i, (name, token)) in repo_files.iter().enumerate().skip(195).take(5) {
         let path = base.join(name);
         fs::remove_file(&path).unwrap();
         {
@@ -916,8 +910,7 @@ fn bigram_overlay_coherence_full_lifecycle_seed_edit_commit_rescan_edit() {
 
     // -- Phase 3: More overlay edits after rescan --
     let mut phase3_tokens = Vec::new();
-    for i in 0..5 {
-        let (ref name, _) = repo_files[i];
+    for (i, (name, _)) in repo_files.iter().take(5).enumerate() {
         let token = format!("PHASE3_EDIT_{i:04}");
         write_file_with_token(base, name, &token);
         {
@@ -995,8 +988,7 @@ fn bigram_overlay_coherence_nested_directory_edits() {
     // Edit one file from each subdir group (the realistic repo rotates
     // through 8 subdirs, so indices 0,1,2,...,7 cover all dirs).
     let mut edited = Vec::new();
-    for i in 0..8 {
-        let (ref name, _) = repo_files[i];
+    for (i, (name, _)) in repo_files.iter().take(8).enumerate() {
         let token = format!("NESTED_EDIT_{i:02}");
         write_file_with_token(base, name, &token);
         {
@@ -1337,12 +1329,8 @@ fn wait_for_bigram(shared_picker: &SharedFilePicker) {
         let ready = shared_picker
             .read()
             .ok()
-            .map(|guard| {
-                guard
-                    .as_ref()
-                    .map_or(false, |p| !p.is_scan_active() && p.bigram_index().is_some())
-            })
-            .unwrap_or(false);
+            .and_then(|guard| guard.as_ref())
+            .is_some_and(|p| !p.is_scan_active() && p.bigram_index().is_some());
         if ready {
             break;
         }
@@ -1355,7 +1343,7 @@ fn wait_for_bigram(shared_picker: &SharedFilePicker) {
 
 fn stop_picker(shared_picker: &SharedFilePicker) {
     if let Ok(mut guard) = shared_picker.write() {
-        if let Some(ref mut picker) = *guard {
+        if let Some(picker) = guard.as_deref_mut() {
             picker.stop_background_monitor();
         }
     }
