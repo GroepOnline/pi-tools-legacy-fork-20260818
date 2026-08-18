@@ -1,6 +1,6 @@
 /**
  * The shared public API surface for the fff file finder, implemented identically
- * by `@ff-labs/fff-node` and `@ff-labs/fff-bun`.
+ * by `@groeponline/fff-node` and `@groeponline/fff-bun`.
  *
  * This file is the single source of truth for every type, helper, and the
  * `FileFinderApi` interface that crosses the package boundary. It is copied
@@ -547,7 +547,7 @@ export interface MultiGrepOptions {
 
 /**
  * The shared instance surface implemented by `FileFinder` in both
- * `@ff-labs/fff-node` and `@ff-labs/fff-bun`.
+ * `@groeponline/fff-node` and `@groeponline/fff-bun`.
  *
  * Both packages must implement this identically. Only instance members belong
  * here. Static helpers (`create`, `isAvailable`, `ensureLoaded`,

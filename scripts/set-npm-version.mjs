@@ -10,8 +10,8 @@ if (!pkgDir || !version) {
 // fff-bun/fff-node pull their native binary from a platform package at runtime.
 // Those are only resolvable once published, so they are injected here instead of
 // living in the manifests where they would break `npm ci` and bun installs.
-const PLATFORM_DEP_CONSUMERS = ["@ff-labs/fff-bun", "@ff-labs/fff-node"];
-const WORKSPACE_DEPS = ["@ff-labs/fff-bun", "@ff-labs/fff-node"];
+const PLATFORM_DEP_CONSUMERS = ["@groeponline/fff-bun", "@groeponline/fff-node"];
+const WORKSPACE_DEPS = ["@groeponline/fff-bun", "@groeponline/fff-node"];
 
 const manifestPath = join(pkgDir, "package.json");
 const pkg = JSON.parse(readFileSync(manifestPath, "utf8"));

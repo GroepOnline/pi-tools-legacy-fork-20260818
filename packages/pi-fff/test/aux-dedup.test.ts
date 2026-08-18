@@ -32,8 +32,8 @@ const finderModule = {
   },
 };
 
-mock.module("@ff-labs/fff-node", () => finderModule);
-mock.module("@ff-labs/fff-bun", () => finderModule);
+mock.module("@groeponline/fff-node", () => finderModule);
+mock.module("@groeponline/fff-bun", () => finderModule);
 
 const { AuxFinderPool } = await import("../src/aux-finders");
 const { FilePickerFactory } = await import("../src/file-picker");

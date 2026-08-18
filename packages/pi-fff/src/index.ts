@@ -23,7 +23,7 @@ import type {
   GrepResult,
   MixedItem,
   SearchResult,
-} from "@ff-labs/fff-node";
+} from "@groeponline/fff-node";
 import { Type, type TSchema } from "@sinclair/typebox";
 import { AuxFinderPool, routePathConstraint } from "./aux-finders";
 import { type FffMode, loadConfig, VALID_MODES } from "./config";

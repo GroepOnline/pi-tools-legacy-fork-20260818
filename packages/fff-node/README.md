@@ -9,7 +9,7 @@ Faster than ripgrep & fzf on any workflow that runs more than once per process.
 ## Installation
 
 ```bash
-npm install @ff-labs/fff-node
+npm install @groeponline/fff-node
 ```
 
 The correct native binary for your platform is installed automatically via platform-specific packages (e.g. `@ff-labs/fff-bin-darwin-arm64`, `@ff-labs/fff-bin-linux-x64-gnu`)
@@ -35,7 +35,7 @@ Each `FileFinder` instance owns an independent native index. Create one, wait
 for the initial scan, then run as many searches as you like.
 
 ```typescript
-import { FileFinder } from "@ff-labs/fff-node";
+import { FileFinder } from "@groeponline/fff-node";
 
 // Create an instance bound to a directory
 const created = FileFinder.create({ basePath: "/path/to/project" });
@@ -165,10 +165,10 @@ cargo build --release -p fff-c
 
 ```bash
 # Download binary manually (fallback if npm package unavailable)
-npx @ff-labs/fff-node download [tag]
+npx @groeponline/fff-node download [tag]
 
 # Show platform info and binary location
-npx @ff-labs/fff-node info
+npx @groeponline/fff-node info
 ```
 
 ## License

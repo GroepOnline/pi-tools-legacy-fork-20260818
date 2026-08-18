@@ -11,8 +11,8 @@ body:
       options:
         - Neovim plugin (fff.nvim)
         - MCP server (fff-mcp)
-        - Node SDK (@ff-labs/fff-node)
-        - Bun SDK (@ff-labs/fff-bun)
+        - Node SDK (@groeponline/fff-node)
+        - Bun SDK (@groeponline/fff-bun)
         - C lib (libfff)
         - Core or Rust crate
     validations:

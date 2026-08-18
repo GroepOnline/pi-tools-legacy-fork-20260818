@@ -10,7 +10,7 @@ body:
       options:
         - Neovim plugin (fff.nvim)
         - MCP server (fff-mcp)
-        - Node SDK (@ff-labs/fff-node)
+        - Node SDK (@groeponline/fff-node)
         - Bun SDK
         - C SDK (libfff)
         - Other / multiple

@@ -62,8 +62,8 @@ const finderModule = {
   },
 };
 
-mock.module("@ff-labs/fff-node", () => finderModule);
-mock.module("@ff-labs/fff-bun", () => finderModule);
+mock.module("@groeponline/fff-node", () => finderModule);
+mock.module("@groeponline/fff-bun", () => finderModule);
 
 mock.module("@earendil-works/pi-tui", () => ({
   Text: class Text {

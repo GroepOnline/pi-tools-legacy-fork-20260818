@@ -48,7 +48,7 @@ export function binaryExists(): boolean {
 /**
  * Try to resolve the binary from the platform-specific npm package.
  *
- * When users install @ff-labs/fff-bun, npm/bun automatically installs the matching
+ * When users install @groeponline/fff-bun, npm/bun automatically installs the matching
  * optionalDependency (e.g. @ff-labs/fff-bin-darwin-arm64). We resolve the binary
  * path by requiring that package's package.json and looking for the binary
  * in the same directory.

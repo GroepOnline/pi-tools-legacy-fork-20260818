@@ -1,4 +1,4 @@
-import type { FileFinderApi, InitOptions, Result } from "@ff-labs/fff-node";
+import type { FileFinderApi, InitOptions, Result } from "@groeponline/fff-node";
 
 export const SCAN_TIMEOUT_MS = 15_000;
 
@@ -34,7 +34,7 @@ export function loadSdk(): Promise<{ FileFinder: FileFinderStatic }> {
   }
 
   // default to node as it seems like default option
-  const pkg = detectRuntime() === "bun" ? "@ff-labs/fff-bun" : "@ff-labs/fff-node";
+  const pkg = detectRuntime() === "bun" ? "@groeponline/fff-bun" : "@groeponline/fff-node";
   const p = import(pkg) as Promise<{ FileFinder: FileFinderStatic }>;
   sdkPromise = p;
   (globalThis as Record<string, unknown>).__fffSdkPromiseGlobal = p;

@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { FileFinder } from "../src/index";
 
 // Real-native tests for #700/#760. Lives here, not in pi-fff/test: that suite
-// mocks @ff-labs/fff-bun process-globally and bun module mocks can't be undone.
+// mocks @groeponline/fff-bun process-globally and bun module mocks can't be undone.
 mock.module("@earendil-works/pi-tui", () => ({
   Text: class Text {
     text: string;
@@ -38,7 +38,7 @@ mock.module("@sinclair/typebox", () => ({
 const { default: fffExtension } = await import("../../pi-fff/src/index");
 
 // Inject this package as the extension's SDK through the cache hook sdk.ts
-// already uses for reloads: CI has no node_modules to resolve "@ff-labs/fff-bun"
+// already uses for reloads: CI has no node_modules to resolve "@groeponline/fff-bun"
 // from pi-fff, and the finder stays the real native one either way.
 (globalThis as Record<string, unknown>).__fffSdkPromiseGlobal = Promise.resolve({
   FileFinder,

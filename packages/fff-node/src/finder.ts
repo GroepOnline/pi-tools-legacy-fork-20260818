@@ -66,7 +66,7 @@ import { err } from "./fff-api.js";
  * @example
  *
  * ```ts
- * import { FileFinder } from "@ff-labs/fff-node";
+ * import { FileFinder } from "@groeponline/fff-node";
  *
  * // Create an instance
  * const finder = FileFinder.create({ basePath: "/path/to/project" });

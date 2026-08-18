@@ -9,7 +9,7 @@ Faster than ripgrep & fzf on any workflow that runs more than once per process.
 ## Installation
 
 ```bash
-bun add @ff-labs/fff-bun
+bun add @groeponline/fff-bun
 ```
 
 The correct native binary for your platform is installed automatically via platform-specific packages (e.g. `@ff-labs/fff-bin-darwin-arm64`, `@ff-labs/fff-bin-linux-x64-gnu`)
@@ -31,7 +31,7 @@ If the platform package isn't available, the postinstall script will attempt to 
 
 ### Standalone executables (`bun build --compile`)
 
-`@ff-labs/fff-bun` embeds the native library into single-file executables built
+`@groeponline/fff-bun` embeds the native library into single-file executables built
 with `bun build --compile`. macOS and Windows work with no extra flags:
 
 ```bash
@@ -55,7 +55,7 @@ Each `FileFinder` instance owns an independent native index. Create one, wait
 for the initial scan, then run as many searches as you like.
 
 ```typescript
-import { FileFinder } from "@ff-labs/fff-bun";
+import { FileFinder } from "@groeponline/fff-bun";
 
 // Create an instance bound to a directory
 const created = FileFinder.create({ basePath: "/path/to/project" });
