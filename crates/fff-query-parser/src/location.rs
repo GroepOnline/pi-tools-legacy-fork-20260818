@@ -1,13 +1,4 @@
-//! Location parsing for file:line:col patterns
-//!
-//! Parses various location formats like:
-//! - `file:12` - Line number
-//! - `file:12:4` - Line and column
-//! - `file:12-114` - Line range
-//! - `file:12:4-20` - Column range on same line
-//! - `file:12:4-14:20` - Position range
-//! - `file(12)` - Visual Studio style line
-//! - `file(12,4)` - Visual Studio style line and column
+//! Location parsing for file:line:col patterns.
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
 pub enum Location {
